@@ -26,11 +26,6 @@ begin
   exit
 end
 
-if ARGV.empty?
-  puts "    error: you must specify a file name"
-  puts option_parser.help
-else
-  file_name = ARGV[0]
-  transformer = Getinline::Transformer.new(file_name)
-  puts transformer.transform
-end
+file_contents = ARGF.read
+transformer = Getinline::Transformer.new(file_contents)
+puts transformer.transform

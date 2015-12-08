@@ -6,17 +6,13 @@ TOKENIZED_ERB_FILE_NAME = "/tmp/tokenized.erb"
 
 module Getinline
   class Transformer
-    def initialize (file_name)
-      @file_name = file_name
+    def initialize (raw_text)
+      @raw_text = raw_text
     end
 
     def transform
-      file = File.open(@file_name, "r")
-      raw_text = file.read
-      file.close
-
-      matches = raw_text.scan(/<%.+?%>/)
-      tokenized_text = raw_text.dup
+      matches = @raw_text.scan(/<%.+?%>/)
+      tokenized_text = @raw_text.dup
       matches.each do |match|
         tokenized_text.sub!(match, TOKEN)
       end
