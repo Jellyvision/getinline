@@ -31,9 +31,6 @@ if ARGV.empty?
   puts option_parser.help
 else
   file_name = ARGV[0]
-  file = File.open(file_name, "r")
-  raw_text = file.read
-  file.close
-  transformer = Getinline::Transformer.new(raw_text)
+  transformer = Getinline::Transformer.new(file_name)
   puts transformer.transform
 end

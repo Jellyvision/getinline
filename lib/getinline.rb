@@ -1,14 +1,16 @@
 require "getinline/version"
+require "premailer"
 
 module Getinline
   class Transformer
-    def initialize (raw_text)
-      @raw_text = raw_text
+    def initialize (file_name)
+      @file_name = file_name
+      @premailer = Premailer.new(@file_name, :warn_level => Premailer::Warnings::SAFE)
     end
 
     # FIXME: Implement this method
     def transform
-      @raw_text
+      @premailer.to_inline_css
     end
   end
 end
