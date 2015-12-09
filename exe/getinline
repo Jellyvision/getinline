@@ -12,7 +12,10 @@ option_parser = OptionParser.new do |opts|
   opts.banner = "
     getinline inlines CSS styles for HTML email development.
 
-    Usage: #{executable_name} file_name
+    Usage:
+      #{executable_name} file_name
+      #{executable_name} < file_name
+      cat file_name | #{executable_name}
   "
 end
 
@@ -26,6 +29,15 @@ begin
   exit
 end
 
-file_contents = ARGF.read
-transformer = Getinline::Transformer.new(file_contents)
-puts transformer.transform
+def transform (file_contents)
+  transformer = Getinline::Transformer.new(file_contents)
+  puts transformer.transform
+end
+
+if ARGV.length > 0
+  ARGV.each do |filename|
+    transform File.read(filename)
+  end
+else
+  transform STDIN.read
+end
