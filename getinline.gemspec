@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jeremy Kahn"]
   spec.email         = ["jeremy@jellyvision.com"]
 
-  spec.summary       = %q{inlines CSS styles for HTML email development}
-  spec.description   = %q{inlines CSS styles for HTML email development and preserves ERB tags}
+  spec.summary       = %q{Inlines CSS styles for HTML email development}
+  spec.description   = %q{Inlines CSS styles for HTML email development and preserves ERB tags}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
