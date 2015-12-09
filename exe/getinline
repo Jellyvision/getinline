@@ -10,7 +10,7 @@ options = {}
 option_parser = OptionParser.new do |opts|
   executable_name = File.basename($PROGRAM_NAME)
   opts.banner = "
-    getinline inlines CSS styles for HTML email development.
+    getinline inlines CSS styles for HTML email development
 
     Usage:
       #{executable_name} file_name
