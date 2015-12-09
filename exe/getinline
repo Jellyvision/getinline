@@ -17,6 +17,10 @@ option_parser = OptionParser.new do |opts|
       #{executable_name} < file_name
       cat file_name | #{executable_name}
   "
+
+  opts.on('-h', '--help', 'Print usage instructions') do
+    options[:show_help] = true
+  end
 end
 
 begin
@@ -32,6 +36,11 @@ end
 def transform (file_contents)
   transformer = Getinline::Transformer.new(file_contents)
   puts transformer.transform
+end
+
+if options[:show_help] == true
+  puts option_parser.banner
+  exit
 end
 
 if ARGV.length > 0
