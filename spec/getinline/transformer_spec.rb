@@ -10,7 +10,6 @@ describe Getinline::Transformer do
       let(:transformed_text) { transformer.transform }
 
       it 'renders inlined html' do
-
         expect(transformed_text).to include(inlined_basic)
       end
     end
