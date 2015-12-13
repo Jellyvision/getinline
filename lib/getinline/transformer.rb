@@ -1,4 +1,4 @@
-require "premailer"
+require 'premailer'
 
 TOKEN = "@TOKEN"
 TOKENIZED_ERB_FILE_NAME = "/tmp/tokenized.erb"
