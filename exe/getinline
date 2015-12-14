@@ -19,7 +19,8 @@ Usage:
 "
 
   opts.on('-h', '--help', 'Print usage instructions') do
-    options[:show_help] = true
+    puts opts
+    exit
   end
 end
 
@@ -29,11 +30,6 @@ rescue OptionParser::InvalidOption => error
   abort "Getinline doesn't recognize that #{error}"
 rescue OptionParser::AmbiguousOption => error
   abort "That's an #{error}"
-end
-
-if options[:show_help] == true
-  puts option_parser.banner
-  exit
 end
 
 def transform (file_contents)
