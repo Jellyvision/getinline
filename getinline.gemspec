@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'getinline'
   spec.version       = Getinline::VERSION
   spec.authors       = ['Jeremy Kahn', 'Travis Pennetti']
-  spec.email         = ['jeremy@jellyvision.com']
+  spec.email         = ['jeremy@jellyvision.com', 'tpennetti@jellyvision.com']
 
   spec.summary       = 'Inlines CSS styles for HTML email development'
   spec.description   = 'Inlines CSS styles for HTML email development and preserves ERB tags'
