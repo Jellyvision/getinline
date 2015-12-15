@@ -1,2 +1,2 @@
-require "getinline/version"
-require "getinline/transformer"
+require 'getinline/version'
+require 'getinline/transformer'
