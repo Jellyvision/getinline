@@ -1,11 +1,11 @@
 require 'premailer'
 
-TOKEN = "@TOKEN"
-TOKENIZED_ERB_FILE_NAME = "/tmp/tokenized.erb"
+TOKEN = '@TOKEN'
+TOKENIZED_ERB_FILE_NAME = '/tmp/tokenized.erb'
 
 module Getinline
   class Transformer
-    def initialize (raw_text, options = {}, premailer_options = {})
+    def initialize(raw_text, options = {}, premailer_options = {})
       @raw_text = raw_text
       @options = options
       @premailer_options = premailer_options

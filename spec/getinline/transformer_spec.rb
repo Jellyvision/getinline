@@ -16,7 +16,7 @@ describe Getinline::Transformer do
       end
 
       context 'plain text' do
-        let(:transformer) { described_class.new(raw_basic, {:mode => :txt}) }
+        let(:transformer) { described_class.new(raw_basic, mode: :txt) }
         let(:transformed_text) { transformer.transform }
         it 'renders plain text' do
           expect(transformed_text).to include(text_basic)
@@ -38,7 +38,7 @@ describe Getinline::Transformer do
       end
 
       context 'plain text' do
-        let(:transformer) { described_class.new(raw_with_tags, {:mode => :txt}) }
+        let(:transformer) { described_class.new(raw_with_tags, mode: :txt) }
         let(:transformed_text) { transformer.transform }
         it 'renders plain text' do
           expect(transformed_text).to include(text_with_tags)
