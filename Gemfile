@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'premailer', '1.8.6'
-gem 'nokogiri', '1.6.7'
+gem 'nokogiri', '~> 1.6.6.4'
 
 group :development, :test do
   gem 'pry', '0.10.3'
