@@ -13,7 +13,7 @@ premailer_options = {
   link_query_string: nil,
   remove_classes: false,
   verbose: false,
-  line_length: 65,
+  line_length: 9001,
   warn_level: Premailer::Warnings::SAFE
 }
 
