@@ -1,4 +1,5 @@
 require 'premailer'
+require 'nokogiri'
 
 TOKEN = '@TOKEN'
 TOKENIZED_ERB_FILE_NAME = '/tmp/tokenized.erb'
@@ -22,7 +23,7 @@ module Getinline
 
       @premailer = Premailer.new(TOKENIZED_ERB_FILE_NAME, @premailer_options)
       premailed_tokenized_text = @options[:mode] == :txt ?
-        @premailer.to_plain_text : @premailer.to_inline_css
+        @premailer.to_plain_text : Nokogiri::HTML(@premailer.to_inline_css).to_html(encoding:'US-ASCII')
       premailed_text = premailed_tokenized_text.dup
 
       matches.each do |match|
