@@ -23,8 +23,8 @@ module Getinline
 
       @premailer = Premailer.new(TOKENIZED_ERB_FILE_NAME, @premailer_options)
       premailed_tokenized_text = @options[:mode] == :txt ?
-        Nokogiri::HTML.fragment(@premailer.to_plain_text) : Nokogiri::HTML(@premailer.to_inline_css)
-      premailed_text = premailed_tokenized_text.dup.to_html(encoding:'US-ASCII')
+        @premailer.to_plain_text : Nokogiri::HTML(@premailer.to_inline_css).to_html(encoding:'US-ASCII')
+      premailed_text = premailed_tokenized_text.dup
 
       matches.each do |match|
         premailed_text.sub!(TOKEN, match)

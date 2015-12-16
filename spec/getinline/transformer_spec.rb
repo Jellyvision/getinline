@@ -62,7 +62,7 @@ describe Getinline::Transformer do
       context 'plain text' do
         let(:transformer) { described_class.new(raw_with_special_characters, mode: :txt) }
         let(:transformed_text) { transformer.transform }
-        it 'encodes special characters to ASCII' do
+        it 'does not encode special characters to ASCII' do
           expect(transformed_text).to include(text_with_special_characters)
         end
       end
