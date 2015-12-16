@@ -45,5 +45,27 @@ describe Getinline::Transformer do
         end
       end
     end
+
+    context 'with special characters' do
+      let(:raw_with_special_characters) { File.read('spec/fixtures/raw/with-encoded-chars.erb') }
+      let(:text_with_special_characters) { File.read('spec/fixtures/text/with-encoded-chars.erb') }
+      let(:inlined_with_special_characters) { File.read('spec/fixtures/inlined/with-encoded-chars.erb') }
+
+      context 'with html tags' do
+        let(:transformer) { described_class.new(raw_with_special_characters) }
+        let(:transformed_html) { transformer.transform }
+        it 'encodes special characters to ASCII' do
+          expect(transformed_html).to include(inlined_with_special_characters)
+        end
+      end
+
+      context 'plain text' do
+        let(:transformer) { described_class.new(raw_with_special_characters, mode: :txt) }
+        let(:transformed_text) { transformer.transform }
+        it 'encodes special characters to ASCII' do
+          expect(transformed_text).to include(text_with_special_characters)
+        end
+      end
+    end
   end
 end
