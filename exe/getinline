@@ -91,7 +91,7 @@ rescue OptionParser::AmbiguousOption => error
   abort "That's an #{error}"
 end
 
-def transform(file_contents, options, premailer_options)
+def transform(file_contents, getinline_options, premailer_options)
   transformer = Getinline::Transformer.new(file_contents, getinline_options, premailer_options)
   puts transformer.transform
 end
