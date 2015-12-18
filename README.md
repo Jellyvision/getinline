@@ -1,34 +1,51 @@
 # Getinline
 
-Inlines CSS styles for HTML email development and preserves ERB tags.
+A CSS inliner for Ruby ERB templates.
+
+The motivation for this project is automating the premailer inliner and plain text generator such that ERB template variables are respected.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'getinline'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install the Getinline gem from [RubyGems](https://rubygems.org/gems/getinline):
 
     $ gem install getinline
 
-## Usage
+or add it to your `Gemfile` and run `bundle`.
 
-`getinline` can be invoked in any of the following ways:
+## Examples
+
+#### Command Line
+
+`getinline` can be invoked in any of the following ways on the command line:
 
 ```shell
-getinline file_name
-getinline < file_name
-cat file_name | getinline
+getinline ./public/index.erb --mode txt
+getinline < ./public/index.erb
+cat ./public/index.erb | getinline
 ```
 
-Output is printed to stdout.
+#### Rake Task
+
+```ruby
+require 'getinline'
+
+namespace :generate do
+  desc 'Generate inlined and plain text email templates'
+  task emails: :environment do
+
+    file = File.read('./public/index.erb')
+
+    html_transformer = Getinline::Transformer.new(file)
+    html_template = html_transformer.transform
+
+    text_transformer = Getinline::Transformer.new(file, mode: :txt)
+    text_template = text_transformer.transform
+
+    File.write('./public/inline/index.erb', html_template)
+    File.write('./public/text/index.erb', text_template)
+  end
+end
+```
 
 ## Development
 
@@ -39,7 +56,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/jellyvision/getinline.
-
 
 ## License
 
