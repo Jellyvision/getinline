@@ -5,7 +5,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'getinline'
 require 'optparse'
 
-options = {
+getinline_options = {
   mode: :html
 }
 premailer_options = {
@@ -14,6 +14,7 @@ premailer_options = {
   remove_classes: false,
   verbose: false,
   line_length: 9001,
+  output_encoding: 'US-ASCII',
   warn_level: Premailer::Warnings::SAFE
 }
 
@@ -30,7 +31,7 @@ option_parser = OptionParser.new do |opts|
   opts.separator 'Options:'
 
   opts.on('--mode MODE', [:html, :txt], 'Output: html or txt') do |v|
-    options[:mode] = v
+    getinline_options[:mode] = v
   end
 
   opts.on('-h', '--help', 'Print usage instructions') do
@@ -69,8 +70,8 @@ option_parser = OptionParser.new do |opts|
     premailer_options[:line_length] = v
   end
 
-  opts.on('-e', '--entities', 'Output HTML entities instead of UTF-8 when using Nokogiri') do
-    premailer_options[:output_encoding] = 'US-ASCII'
+  opts.on('-n', '--no-entities', 'Output UTF-8 instead of HTML entities when using Nokogiri') do
+    premailer_options[:output_encoding] = nil
   end
 
   opts.on('-d', '--io-exceptions', 'Abort on I/O errors') do |v|
@@ -90,13 +91,13 @@ rescue OptionParser::AmbiguousOption => error
   abort "That's an #{error}"
 end
 
-def transform(file_contents, options, premailer_options)
-  transformer = Getinline::Transformer.new(file_contents, options, premailer_options)
+def transform(file_contents, getinline_options, premailer_options)
+  transformer = Getinline::Transformer.new(file_contents, getinline_options, premailer_options)
   puts transformer.transform
 end
 
 if ARGF.filename != '-' || (!STDIN.tty? && !STDIN.closed?)
-  transform(ARGF.read, options, premailer_options)
+  transform(ARGF.read, getinline_options, premailer_options)
 else
   puts option_parser
   exit

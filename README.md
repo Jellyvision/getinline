@@ -15,6 +15,7 @@ or add it to your `Gemfile` and run `bundle`.
 ## Examples
 
 #### Command Line
+
 `getinline` can be invoked in any of the following ways on the command line:
 
 ```shell
@@ -41,7 +42,7 @@ namespace :generate do
     text_template = text_transformer.transform
 
     File.write('./public/inline/index.erb', html_template)
-    File.write('./public/inline/index.erb', text_template)
+    File.write('./public/text/index.erb', text_template)
   end
 end
 ```
