@@ -6,10 +6,22 @@ TOKENIZED_ERB_FILE_NAME = '/tmp/tokenized.erb'
 
 module Getinline
   class Transformer
-    def initialize(raw_text, options = {}, premailer_options = {})
+    def initialize(raw_text, options = {})
       @raw_text = raw_text
-      @options = options
-      @premailer_options = premailer_options
+      @options = default_options.merge(options)
+    end
+
+    def default_options
+      @default_options ||= {
+        mode: :html,
+        base_url: nil,
+        link_query_string: nil,
+        remove_classes: false,
+        verbose: false,
+        line_length: 9001,
+        output_encoding: 'US-ASCII',
+        warn_level: Premailer::Warnings::SAFE
+      }
     end
 
     def transform
@@ -21,7 +33,7 @@ module Getinline
 
       File.write(TOKENIZED_ERB_FILE_NAME, tokenized_text)
 
-      @premailer = Premailer.new(TOKENIZED_ERB_FILE_NAME, @premailer_options)
+      @premailer = Premailer.new(TOKENIZED_ERB_FILE_NAME, @options)
       premailed_tokenized_text = @options[:mode] == :txt ?
         @premailer.to_plain_text : @premailer.to_inline_css
       premailed_text = premailed_tokenized_text.dup
